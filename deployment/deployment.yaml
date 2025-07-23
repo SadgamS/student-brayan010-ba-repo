@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-brayan-app
+  labels:
+    app: student-brayan-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-brayan-app
+  template:
+    metadata:
+      labels:
+        app: student-brayan-app
+    spec:
+      containers:
+        - name: student-brayan-app
+          image: us-central1-docker.pkg.dev/devsecops-lab-464018/student-brayan010-ba/student-brayan-app/student-brayan-app:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
